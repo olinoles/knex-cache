@@ -20,10 +20,7 @@ export function attachCache() {
       throw new Error(e as string);
     }
   }
-  async function invalidateCache(
-    this: Knex.QueryBuilder,
-    { key }: CacheOptions
-  ) {
+  function invalidateCache(this: Knex.QueryBuilder, { key }: CacheOptions) {
     try {
       const cacheKey: string = key || this.toString();
       if (cache[cacheKey]) {
@@ -34,7 +31,14 @@ export function attachCache() {
       throw new Error(e as string);
     }
   }
+  function clearCache(this: Knex.QueryBuilder) {
+    Object.keys(cache).forEach((key) => {
+      delete cache[key];
+    });
+    return this;
+  }
 
   knex.QueryBuilder.extend("cache", setCache);
   knex.QueryBuilder.extend("invalidate", invalidateCache);
+  knex.QueryBuilder.extend("clearCache", clearCache);
 }

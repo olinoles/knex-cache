@@ -3,15 +3,21 @@ import { Knex } from "knex";
 interface CacheOptions {
   key?: string;
 }
+type CacheMethod = <TRecord extends {} = any, TResult = any>(
+  options?: CacheOptions
+) => Knex.QueryBuilder<TRecord, TResult>;
+
+type ClearCacheMethod = <
+  TRecord extends {} = any,
+  TResult = any
+>() => Knex.QueryBuilder<TRecord, TResult>;
+
 declare module "knex" {
   namespace Knex {
     interface QueryInterface {
-      cache<TRecord extends {} = any, TResult = any>(
-        options?: CacheOptions
-      ): Knex.QueryBuilder<TRecord, TResult>;
-      invalidate<TRecord extends {} = any, TResult = any>(
-        options?: CacheOptions
-      ): Knex.QueryBuilder<TRecord, TResult>;
+      cache: CacheMethod;
+      invalidate: CacheMethod;
+      clearCache: ClearCacheMethod;
     }
   }
 }

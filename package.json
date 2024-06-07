@@ -1,6 +1,6 @@
 {
   "name": "knex-cache-plugin",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "A caching plugin for Knex.js",
   "main": "lib/index.js",
   "scripts": {

@@ -1,10 +1,10 @@
 # Knex-cache
 
-A plugin for Knex.js SQL Query builder to help with any caching you may need on your DB.
+A plugin for Knex.js SQL Query builder to help with any caching you may need.
 
-## How to set up
+## How to install
 
-To use this lib, first you will have to install it:
+To use this extension, first you will have to install it:
 
 ```
 # PNPM
@@ -25,13 +25,14 @@ attachCache();
 
 ## How to use
 
-### Example
+### Caching result of a query
 
 ```javascript
 const client = knex(config);
 
 const result = await client("users").cache();
-// will return result as normal, retrieve from cache if available, or store new result in cache
+// returns query result and caches if not set
+// calling this again will return the cached result
 
 const result = await client("users")
   .select("name", "email")
@@ -41,16 +42,27 @@ const result = await client("users")
 
 const result = await client("users").cache({ key: "fetchUsers" });
 // use a custom cache key
+```
 
-client.invalidate({ key: "fetchUsers" });
-// invalidate a cache using its key
+### Invalidating cache
+
+```javascript
+const client = knex(config);
 
 client("users").invalidate();
 // invalidate query automatically
 
-const result = await client("users");
-// will not be cached or affected by cache
-// caching is explicit opt-in.
+client.invalidate({ key: "fetchUsers" });
+// invalidate a cache using a key
+```
+
+### Clearing cache
+
+```javascript
+const client = knex(config);
+
+client.clearCache();
+// clear all records in the cache
 ```
 
 This package was inspired by [this comment](https://github.com/knex/knex/issues/2787#issuecomment-530780656) by [AxxxxOn](https://github.com/Axxxx0n).
