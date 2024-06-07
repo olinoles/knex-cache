@@ -1,0 +1,25 @@
+{
+  "name": "knex-cache",
+  "version": "1.0.0",
+  "description": "A caching plugin for Knex.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olinoles/knex-cache"
+  },
+  "keywords": [
+    "knex",
+    "cache"
+  ],
+  "author": "olinoles",
+  "license": "ISC",
+  "devDependencies": {
+    "knex": "^3.1.0"
+  },
+  "peerDependencies": {
+    "knex": ">= 0.95.0"
+  }
+}
