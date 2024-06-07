@@ -1,5 +1,5 @@
 {
-  "name": "knex-cache",
+  "name": "knex-cache-plugin",
   "version": "1.0.0",
   "description": "A caching plugin for Knex.js",
   "main": "index.js",
