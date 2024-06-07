@@ -15,3 +15,5 @@ declare module "knex" {
     }
   }
 }
+
+export function attachCache(): void;
