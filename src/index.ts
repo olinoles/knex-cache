@@ -7,9 +7,9 @@ interface CacheOptions {
 }
 
 export function attachCache() {
-  async function setCache(this: Knex.QueryBuilder, { key }: CacheOptions) {
+  async function setCache(this: Knex.QueryBuilder, options?: CacheOptions) {
     try {
-      const cacheKey: string = key || this.toString();
+      const cacheKey: string = options?.key || this.toString();
       if (cache[cacheKey]) {
         return cache[cacheKey];
       }
@@ -20,9 +20,9 @@ export function attachCache() {
       throw new Error(e as string);
     }
   }
-  function invalidateCache(this: Knex.QueryBuilder, { key }: CacheOptions) {
+  function invalidateCache(this: Knex.QueryBuilder, options?: CacheOptions) {
     try {
-      const cacheKey: string = key || this.toString();
+      const cacheKey: string = options?.key || this.toString();
       if (cache[cacheKey]) {
         delete cache[cacheKey];
       }
